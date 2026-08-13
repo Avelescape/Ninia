@@ -2,286 +2,220 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Galerie Ninia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#11100e">
+  <title>Entre deux mondes — NINIA</title>
   <style>
-    :root {
-      --noir: #11100e;
-      --creme: #eee6d8;
-      --beige-clair: #e7dece;
-      --or: #c99749;
-      --taupe: #aaa094;
-      --noir-foncé: #181612;
-      --lien: #7a6c60;
-      --lien-hover: #9e7332;
+    :root{--noir:#11100e;--brun:#24170d;--creme:#eee6d8;--papier:#e7dece;--or:#c99749;--taupe:#776d60;--ligne:#c8bba8}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--papier);color:var(--brun);font-family:Arial,sans-serif}
+    body.menu-ouvert{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+
+    .entete{position:relative;min-height:68vh;padding:26px 6vw 80px;display:flex;flex-direction:column;justify-content:space-between;background:var(--noir);color:var(--creme);overflow:hidden}
+    .entete::after{content:"";position:absolute;right:-10%;bottom:-38%;width:65vw;height:65vw;border:1px solid rgba(201,151,73,.22);border-radius:50%;box-shadow:0 0 0 5vw rgba(201,151,73,.04),0 0 0 11vw rgba(201,151,73,.025)}
+    .barre{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between}
+    .logo{font:400 clamp(1.7rem,5vw,2.5rem) Georgia,serif;letter-spacing:.24em}
+    .logo small{display:block;margin-top:6px;font:400 .57rem Arial,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:var(--or)}
+    .menu-bouton{width:48px;height:48px;border:0;background:transparent;padding:8px;cursor:pointer}
+    .menu-bouton span{display:block;width:100%;height:2px;margin:7px 0;background:var(--or);transition:.3s}
+    nav{position:fixed;z-index:20;inset:0;background:rgba(15,12,9,.985);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transform:translateY(-105%);transition:.45s;color:var(--creme)}
+    nav.ouvert{transform:none}
+    nav a{font:2rem Georgia,serif}
+    nav a:hover{color:var(--or)}
+    .fermer{position:absolute;top:27px;right:6vw;width:45px;height:45px;border:0;background:transparent;color:var(--or);font-size:2rem;cursor:pointer}
+    .titre{position:relative;z-index:2;max-width:900px;margin-top:12vh}
+    .surtitre{text-transform:uppercase;color:var(--or);letter-spacing:.24em;font-size:.65rem}
+    .titre h1{font:400 clamp(3.5rem,12vw,8.5rem)/.92 Georgia,serif;margin:24px 0}
+    .titre>p:last-child{max-width:590px;color:#aaa094;line-height:1.8;font-size:.98rem}
+
+    .introduction{padding:90px 7vw 70px;display:grid;gap:35px;border-bottom:1px solid var(--ligne)}
+    .introduction h2{font:400 clamp(2.6rem,7vw,5rem)/1.05 Georgia,serif;margin:0;max-width:750px}
+    .introduction p{max-width:540px;margin:0;color:var(--taupe);line-height:1.8}
+
+    .galerie{padding:80px 6vw 120px}
+    .grille{display:grid;grid-template-columns:repeat(12,1fr);gap:9vw 3vw;max-width:1500px;margin:auto}
+    .oeuvre{grid-column:span 6;align-self:start}
+    .oeuvre:nth-child(3n+2){margin-top:12vw}
+    .oeuvre.portrait{grid-column:span 5}
+    .oeuvre.paysage{grid-column:span 7}
+    .oeuvre:nth-child(even){justify-self:end}
+    .cadre{position:relative;background:#d2c6b5;overflow:hidden;cursor:zoom-in}
+    .portrait .cadre{aspect-ratio:3/4}
+    .paysage .cadre{aspect-ratio:4/3}
+    .cadre img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
+    .cadre::after{content:"Voir l’œuvre  +";position:absolute;right:18px;bottom:18px;padding:10px 13px;background:rgba(17,16,14,.82);color:var(--creme);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.35s}
+    .cadre:hover img{transform:scale(1.025);filter:brightness(.93)}
+    .cadre:hover::after{opacity:1;transform:none}
+    .numero{display:block;margin-top:20px;color:var(--or);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase}
+    .oeuvre h2{font:400 clamp(1.8rem,3vw,2.7rem) Georgia,serif;margin:9px 0 15px}
+    .details{display:grid;grid-template-columns:1fr auto;gap:25px;padding-top:18px;border-top:1px solid var(--ligne)}
+    .mot-titre{margin:0 0 8px;color:var(--brun);font-size:.61rem;letter-spacing:.18em;text-transform:uppercase}
+    .mot{margin:0;max-width:520px;color:var(--taupe);font:italic 1rem/1.7 Georgia,serif}
+    .prix{text-align:right;white-space:nowrap}
+    .prix span{display:block;margin-bottom:8px;color:var(--taupe);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase}
+    .prix strong{font:400 1.1rem Georgia,serif;color:var(--brun)}
+    .fiche{margin-top:16px;color:#8b8174;font-size:.61rem;letter-spacing:.12em;text-transform:uppercase}
+
+    .contact{min-height:620px;padding:100px 7vw 42px;display:flex;flex-direction:column;background:var(--noir);color:var(--creme)}
+    .contact h2{font:400 clamp(3rem,10vw,7rem)/1 Georgia,serif;margin:25px 0 55px;max-width:980px}
+    .email{font:1.2rem Georgia,serif;border-bottom:1px solid #5f5140;padding-bottom:15px;max-width:520px}
+    .liens{display:flex;gap:30px;flex-wrap:wrap;margin-top:55px;text-transform:uppercase;letter-spacing:.14em;font-size:.67rem}
+    .liens a{padding-bottom:10px;border-bottom:1px solid #312c25}
+    .contact small{margin-top:auto;color:#6f685f;font-size:.6rem}
+
+    .lightbox{position:fixed;z-index:50;inset:0;display:none;align-items:center;justify-content:center;padding:5vw;background:rgba(10,9,8,.96)}
+    .lightbox.visible{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,.45)}
+    .lightbox button{position:absolute;top:22px;right:28px;width:48px;height:48px;border:0;background:transparent;color:var(--creme);font-size:2.2rem;cursor:pointer}
+
+    @media(max-width:760px){
+      .entete{min-height:72vh;padding:22px 7vw 55px}.entete::after{width:105vw;height:105vw;right:-50%;bottom:-25%}
+      .logo{font-size:1.65rem}.menu-bouton{width:43px;height:43px}
+      .titre{margin-top:10vh}.titre h1{font-size:clamp(3.35rem,17vw,5.2rem)}
+      .introduction{padding:70px 7vw 55px}.introduction h2{font-size:clamp(2.4rem,12vw,3.7rem)}
+      .galerie{padding:60px 7vw 90px}.grille{display:block}
+      .oeuvre,.oeuvre.portrait,.oeuvre.paysage{width:100%;margin:0 0 80px}
+      .oeuvre.portrait .cadre{width:82%;margin-left:auto;margin-right:auto}
+      .oeuvre:nth-child(3n+2){margin-top:0}
+      .details{grid-template-columns:1fr;gap:18px}.prix{text-align:left}.prix span{display:inline;margin-right:10px}
+      .cadre::after{opacity:1;transform:none}
+      .contact{min-height:600px;padding:85px 7vw 35px}.contact h2{font-size:clamp(2.8rem,14vw,4.3rem)}
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--noir);
-      color: var(--creme);
-      font-family: Arial, sans-serif;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-
-    .gallery-page {
-      background: var(--noir);
-      padding: 80px 4vw 100px;
-    }
-
-    .gallery-header {
-      max-width: 1200px;
-      margin: 0 auto 42px;
-    }
-
-    .surtitre {
-      margin: 0 0 18px;
-      text-transform: uppercase;
-      color: var(--or);
-      letter-spacing: .24em;
-      font-size: .65rem;
-    }
-
-    .gallery-title {
-      margin: 0;
-      font-family: Georgia, serif;
-      font-weight: 400;
-      font-size: clamp(2.8rem, 8vw, 5rem);
-      line-height: 1.02;
-      color: var(--creme);
-    }
-
-    .collections {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2.2rem 2vw;
-      background: var(--beige-clair);
-      color: #1b1712;
-      padding: 30px 2vw 60px;
-    }
-
-    .collection {
-      background: transparent;
-    }
-
-    .image-collection {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: #40352b;
-    }
-
-    .image-collection img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .5s ease;
-    }
-
-    .collection:hover .image-collection img {
-      transform: scale(1.03);
-    }
-
-    .image-collection span {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      background: rgba(20,16,12,.70);
-      color: #dcb068;
-      font-size: .66rem;
-    }
-
-    .infos {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 22px 4px 0;
-      gap: 1rem;
-    }
-
-    .infos p {
-      margin: 0;
-      color: #776d60;
-      text-transform: uppercase;
-      letter-spacing: .13em;
-      font-size: .6rem;
-    }
-
-    .infos h2 {
-      margin: 8px 0 0;
-      font: 400 1.8rem Georgia, serif;
-      line-height: 1.1;
-    }
-
-    .infos > a {
-      font: 600 .6rem -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      color: var(--lien);
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: .3s ease;
-      opacity: .85;
-      white-space: nowrap;
-      font-size: .6rem;
-      line-height: 1.2;
-    }
-
-    .infos > a::after {
-      content: " →";
-      font-size: .95em;
-      transition: transform .3s ease;
-      color: #8d7d6f;
-    }
-
-    .infos > a:hover {
-      opacity: 1;
-      color: var(--lien-hover);
-    }
-
-    .infos > a:hover::after {
-      transform: translateX(3px);
-    }
-
-    .btn-retour {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 32px auto 0;
-      padding: 14px 22px;
-      background: #72c8ff;
-      color: #06263d;
-      border: 2px solid #1e9fe8;
-      border-radius: 12px;
-      font: 700 .75rem -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      box-shadow: 0 8px 22px rgba(114,200,255,.45);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .btn-retour:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(114,200,255,.7);
-    }
-
-    @media (max-width: 860px) {
-      .collections {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 620px) {
-      .gallery-page {
-        padding-left: 7vw;
-        padding-right: 7vw;
-      }
-
-      .collections {
-        grid-template-columns: 1fr;
-        padding-left: 6vw;
-        padding-right: 6vw;
-      }
-
-      .infos {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .infos > a {
-        font-size: 1.1rem;
-      }
-    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}nav,.cadre img,.cadre::after{transition:none}}
   </style>
 </head>
 <body>
-  <main class="gallery-page">
-    <header class="gallery-header">
-      <p class="surtitre">Œuvres & collections</p>
-      <h1 class="gallery-title">La matière comme paysage</h1>
-    </header>
+  <header class="entete" id="haut">
+    <div class="barre">
+      <a class="logo" href="../maquette2/index.html">NINIA<small>Artiste</small></a>
+      <button class="menu-bouton" id="menuBouton" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <div class="titre">
+      <p class="surtitre">Galerie · Série</p>
+      <h1>L'Entre deux<br>mondes</h1>
+    
+    </div>
+  </header>
 
-    <section class="collections" aria-label="Galerie d'œuvres de Ninia">
-      <article class="collection">
-        <div class="image-collection">
-          <img src="images/oeuvre2.jpg" alt="Entre deux mondes">
-        </div>
-        <div class="infos">
-          <div>
-            <p>Série</p>
-            <h2>Entre deux mondes</h2>
-          </div>
-          <a href="galerie1.html" aria-label="Découvrir la collection">Entrez dans la galerie</a>
-        </div>
-      </article>
+  <nav id="menu" aria-label="Navigation principale">
+    <button class="fermer" id="fermerMenu" aria-label="Fermer le menu">×</button>
+    <a href="../maquette2/index.html">Accueil</a>
+    <a href="#galerie">Les œuvres</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-      <article class="collection">
-        <div class="image-collection">
-          <img src="images/oeuvre9.png" alt="Pièces sculpturales">
-        </div>
-        <div class="infos">
-          <div>
-            <p>Uniques</p>
-            <h2>Pièces sculpturales</h2>
-          </div>
-          <a href="#">Entrez dans la galerie</a>
-        </div>
-      </article>
-
-      <article class="collection">
-        <div class="image-collection">
-          <img src="images/oeuvre7.jpg" alt="Lumières enfouies">
-        </div>
-        <div class="infos">
-          <div>
-            <p>Tableaux</p>
-            <h2>Lumières enfouies</h2>
-          </div>
-          <a href="#">Entrez dans la galerie</a>
-        </div>
-      </article>
-
-      <article class="collection">
-        <div class="image-collection">
-          <img src="images/WEBPchevalet1.webp" alt="Atelier de Ninia">
-        </div>
-        <div class="infos">
-          <div>
-            <p>Studio</p>
-            <h2>Atelier intime</h2>
-          </div>
-          <a href="#">Entrez dans la galerie</a>
-        </div>
-      </article>
-
-      <article class="collection">
-        <div class="image-collection">
-          <img src="images/WEBPNinia.webp" alt="Portrait de Ninia">
-        </div>
-        <div class="infos">
-          <div>
-            <p>Portrait</p>
-            <h2>Le geste créateur</h2>
-          </div>
-          <a href="#">Entrez dans la galerie</a>
-        </div>
-      </article>
+  <main>
+    <section class="introduction">
+      <div><p class="surtitre">La collection</p><h2>Des œuvres uniques.</h2></div>
+      
     </section>
 
-    <div style="display:flex; justify-content:center;">
-      <a href="../index.html" class="btn-retour">Retour aux maquettes</a>
-    </div>
+    <!--
+      Pour modifier une œuvre :
+      1. Remplacez le chemin src="../images/oeuvre..."
+      2. Modifiez le titre, les dimensions, le texte et le prix
+      3. Utilisez la classe "portrait" ou "paysage"
+    -->
+    <section class="galerie" id="galerie">
+      <div class="grille">
+        <article class="oeuvre portrait">
+          <div class="cadre"><img src="../images/oeuvre2.jpg" alt="L'Entre deux mondes: L'Arbre" loading="lazy"></div>
+          <span class="numero">Œuvre 01 · Portrait</span>
+          <h2>L'Entre deux mondes: L'Arbre</h2>
+          <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Dans cette œuvre, la matière devient un passage. L’arbre, dont l’élan se prolonge vers le ciel, s’est imposé à moi. Puis, au fil de la création, des êtres se sont invités dans la matière — des présences que certains regards sauront peut-être percevoir.  »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
+          <p class="fiche">Technique mixte sur toile · 90 × 70 cm · Pièce unique</p>
+        </article>
+
+    
+
+        <article class="oeuvre paysage">
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: La Terre" loading="lazy"></div>
+          <span class="numero">Œuvre 03 · Paysage</span>
+          <h2>L'Entre deux monde: La Terre</h2>
+          <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Cet horizon n’appartient à aucun lieu précis. Il est né d’un souvenir, puis le geste et les textures lui ont donné leur propre histoire. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
+          <p class="fiche">Technique mixte sur toile · 80 × 120 cm · Pièce unique</p>
+        </article>
+
+        <article class="oeuvre portrait">
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: Le Ciel" loading="lazy"></div>
+          <span class="numero">Œuvre 04 · Portrait</span>
+          <h2>L'Entre deux mondes: Le Ciel</h2>
+          <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Superposer, effacer, recommencer : chaque strate conserve la mémoire de la précédente jusqu’à ce qu’un équilibre inattendu apparaisse. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
+          <p class="fiche">Acrylique, sable et feuille métallique · 100 × 70 cm · Pièce unique</p>
+        </article>
+
+        <article class="oeuvre portrait">
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: Le Feu" loading="lazy"></div>
+          <span class="numero">Œuvre 05 · Portrait</span>
+          <h2>L'Entre deux mondes: Le Feu</h2>
+          <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Les tons profonds invitent à ralentir. Quelques éclats traversent la surface comme une respiration retenue dans la matière. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
+          <p class="fiche">Technique mixte sur toile · 80 × 60 cm · Pièce unique</p>
+        </article>
+
+        <article class="oeuvre paysage">
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: L'Eau" loading="lazy"></div>
+          <span class="numero">Œuvre 06 · Paysage</span>
+          <h2>L'Entre deux mondes: L'Eau</h2>
+          <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« La lumière n’est pas posée sur la toile : elle semble venir de l’intérieur, filtrée par les couches, les creux et les irrégularités. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
+          <p class="fiche">Acrylique et matières sur toile · 70 × 110 cm · Pièce unique</p>
+        </article>
+      </div>
+    </section>
   </main>
+
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Agrandissement de l’œuvre">
+    <button id="fermerLightbox" aria-label="Fermer l’image">×</button>
+    <img id="imageLightbox" src="" alt="">
+  </div>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const menuBouton = document.getElementById("menuBouton");
+    const fermerMenu = document.getElementById("fermerMenu");
+
+    function basculerMenu(ouvert) {
+      menu.classList.toggle("ouvert", ouvert);
+      document.body.classList.toggle("menu-ouvert", ouvert);
+      menuBouton.setAttribute("aria-expanded", ouvert);
+    }
+
+    menuBouton.addEventListener("click", () => basculerMenu(true));
+    fermerMenu.addEventListener("click", () => basculerMenu(false));
+    menu.querySelectorAll("a").forEach(lien => lien.addEventListener("click", () => basculerMenu(false)));
+
+    const lightbox = document.getElementById("lightbox");
+    const imageLightbox = document.getElementById("imageLightbox");
+    const fermerLightbox = document.getElementById("fermerLightbox");
+
+    document.querySelectorAll(".cadre img").forEach(image => {
+      image.parentElement.addEventListener("click", () => {
+        imageLightbox.src = image.src;
+        imageLightbox.alt = image.alt;
+        lightbox.classList.add("visible");
+        document.body.classList.add("menu-ouvert");
+      });
+    });
+
+    function fermerAgrandissement() {
+      lightbox.classList.remove("visible");
+      document.body.classList.remove("menu-ouvert");
+      imageLightbox.src = "";
+    }
+
+    fermerLightbox.addEventListener("click", fermerAgrandissement);
+    lightbox.addEventListener("click", evenement => {
+      if (evenement.target === lightbox) fermerAgrandissement();
+    });
+    document.addEventListener("keydown", evenement => {
+      if (evenement.key === "Escape") {
+        basculerMenu(false);
+        fermerAgrandissement();
+      }
+    });
+  </script>
 </body>
 </html>
