@@ -1054,6 +1054,29 @@
             letter-spacing: 0.05em;
         }
 
+        .back-to-maquettes {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 24px auto 0;
+            padding: 14px 24px;
+            background: #7fd6ff;
+            color: #06212f;
+            border: 3px solid #2ca7ea;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(79, 182, 255, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .back-to-maquettes:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 26px rgba(79, 182, 255, 0.7);
+        }
+
         /* ANIMATION UTILITIES */
         .reveal {
             opacity: 0;
@@ -1438,6 +1461,9 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <p class="copyright">&copy; 2026 NINIA Studio — Tous droits réservés. Galerie & Propriété Artistique.</p>
+            <div style="display:flex; justify-content:center; margin-top: 24px;">
+                <a href="../index.html" class="back-to-maquettes">Retour aux maquettes</a>
+            </div>
         </div>
     </footer>
 
