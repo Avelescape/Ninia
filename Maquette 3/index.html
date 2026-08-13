@@ -1,1 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINA — Peintures & Sculptures Contemporaines</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           VARIABLES & RESETS
+           ========================================================================== */
+        :root {
+            --bg-dark: #1a1a1a;
+            --bg-dark-accent: #242424;
+            --bg-light: #f4efe8;
+            --bg-card: #ede6dd;
+            --text-dark: #2b2825;
+            --text-muted: #6e675f;
+            --text-light: #f4efe8;
+            --accent-gold: #c29b53;
+            --accent-gold-hover: #d4af37;
+            --border-subtle: rgba(194, 155, 83, 0.25);
+            --font-title: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ==========================================================================
+           SIDEBAR / NAVIGATION (STYLE MAQUETTE)
+           ========================================================================== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3rem 2rem;
+            z-index: 100;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand h1 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: rgba(244, 239, 232, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-gold);
+            padding-left: 8px;
+        }
+
+        .sidebar-footer {
+            text-align: center;
+        }
+
+        .botanical-icon {
+            width: 32px;
+            height: auto;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 2px var(--accent-gold));
+        }
+
+        /* Burger Menu (Mobile) */
+        .mobile-header {
+            display: none;
+        }
+
+        /* ==========================================================================
+           MAIN CONTENT CONTAINER
+           ========================================================================== */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            width: calc(100% - var(--sidebar-width));
+            padding: 4rem 5%;
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h2 {
+            font-family: var(--font-title);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            border-color: var(--bg-dark);
+        }
+
+        .hero-gallery {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-img-main {
+            width: 70%;
+            height: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-radius: 2px;
+            z-index: 2;
+            border: 8px solid #dfd8cf;
+        }
+
+        .hero-img-secondary {
+            position: absolute;
+            width: 55%;
+            top: -10%;
+            right: 0%;
+            z-index: 1;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            filter: brightness(0.95);
+        }
+
+        /* ==========================================================================
+           SECTIONS GENERAL
+           ========================================================================== */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        /* ==========================================================================
+           GALLERY / OEUVRES
+           ========================================================================== */
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .artwork-card {
+            background-color: var(--bg-card);
+            padding: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .artwork-img-wrapper {
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            position: relative;
+            background-color: #dcd4c9;
+        }
+
+        .artwork-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: scale 0.5s ease;
+        }
+
+        .artwork-card:hover img {
+            scale: 1.03;
+        }
+
+        .artwork-info {
+            padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+        }
+
+        .artwork-title {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .artwork-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           ABOUT SECTION (L'ARTISTE)
+           ========================================================================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+
+        .quote-box {
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #4a443d;
+        }
+
+        /* ==========================================================================
+           CONTACT SECTION
+           ========================================================================== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid #d4ccbf;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 992px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem 2rem;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .sidebar-footer {
+                display: none;
+            }
+
+            .nav-links {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-container,
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-img-secondary {
+                position: relative;
+                width: 80%;
+                top: 0;
+                margin-top: -30%;
+                margin-left: auto;
+            }
+
+            .hero-img-main {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none; /* Simplifié pour mobile */
+            }
+
+            .mobile-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .hero-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR LEFT (Style Maquette & Intérieur Sombre) -->
+    <aside class="sidebar">
+        <div class="brand">
+            <h1>NINA</h1>
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#accueil" class="active">Accueil</a></li>
+                <li><a href="#peintures">Peintures</a></li>
+                <li><a href="#sculptures">Céramiques & Sculptures</a></li>
+                <li><a href="#artiste">L'Artiste</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <!-- Motif Botanique Minimaliste -->
+            <svg class="botanical-icon" viewBox="0 0 24 24" fill="none" stroke="#c29b53" stroke-width="1.2">
+                <path d="M12 22V2M12 18C14 16 17 16 17 13C17 10 12 8 12 8M12 14C10 12 7 12 7 9C7 6 12 4 12 4M12 10C14 8 16 8 16 5C16 2 12 2 12 2"/>
+            </svg>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+        <!-- HERO SECTION -->
+        <section id="accueil" class="hero">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h2>La matière raconte</h2>
+                    <p>Peintures & sculptures contemporaines</p>
+                    <a href="#peintures" class="btn">Entrer dans l'atelier</a>
+                </div>
+                <div class="hero-gallery">
+                    <img src="../images/oeuvre2.jpg" alt="Peinture paysage abstrait" class="hero-img-main">
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- PEINTURES -->
+        <section id="peintures">
+            <div class="section-header">
+                <h3 class="section-title">Peintures</h3>
+            </div>
+            <div class="artwork-grid">
+                <!-- Carte 1 -->
+                <div class="artwork-card">
+                    <div class="artwork-img-wrapper">
+                        <img src="../images/oeuvre1.jpg" alt="Rivage Minéral">
+                    </div>
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Rivage Minéral</h4>
+                        <p class="artwork-meta">Huile, pigments & pigments dorés sur toile </p>
+                    </div>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="artwork-card">
+                    <div class="artwork-img-wrapper">
+                        <img src="../images/WEBPchevalet1.webp" alt="L'Arbre de Matière">
+                    </div>
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Écorce & Lumière</h4>
+                        <p class="artwork-meta">Technique mixte & relief sur toile — 100 x 150 cm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCULPTURES & CÉRAMIQUES -->
+        <section id="sculptures">
+            <div class="section-header">
+                <h3 class="section-title">Céramiques & Sculptures</h3>
+            </div>
+            <div class="artwork-grid">
+                <!-- Carte Sculpture (Placeholder stylisé) -->
+                <div class="artwork-card">
+                    <div class="artwork-img-wrapper">
+                        <img src="../images/oeuvre9.png" alt="Bol en céramique artisanale">
+                    </div>
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Vase I</h4>
+                        
+                    </div>
+                </div>
+
+                <div class="artwork-card">
+                    <div class="artwork-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&q=80&w=800" alt="Sculpture céramique">
+                    </div>
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Forme Brut</h4>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- L'ARTISTE -->
+        <section id="artiste">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>L'Atelier & La Démarche</h3>
+                    <p>Au cœur du travail de Nina réside une quête sensorielle : révéler la beauté brute des minéraux, de la terre et du végétal. Chaque œuvre est une exploration tactile où les strates de peintures, les pigments d'or et les empreintes s'amalgament pour créer un dialogue unique avec la lumière.</p>
+
+                    <div class="quote-box">
+                        « Façonner la matière, c’est capturer l’empreinte du temps et l'organique de la nature. »
+                    </div>
+
+                    <p>Travaillant à la fois la toile et le volume, ses sculptures et ses peintures imposantes s'harmonisent dans une direction artistique où le noir profond, les teintes sable et les dorures subtiles subliment les intérieurs d'exception.</p>
+                </div>
+                <div class="about-image">
+                    <img src="../images/Ninia.JPG", alt="Atelier de l'artiste" style="width: 100%; filter: sepia(0.2) contrast(1.05); border-radius: 2px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="section-header">
+                <h3 class="section-title">Acquisitions & Contact</h3>
+            </div>
+            <div class="contact-container">
+                <div>
+                    <p style="margin-bottom: 2rem;">Pour toute demande d'acquisition, commande personnalisée ou visite sur rendez-vous à l'atelier, vous pouvez laisser un message ci-contre.</p>
+                    <p><strong>Atelier Nina</strong><br>Visites sur rendez-vous uniquement.</p>
+                    <p style="margin-top: 1rem; color: var(--accent-gold);">contact@nina-artiste.com</p>
+                </div>
+                <form onsubmit="event.preventDefault(); alert('Message envoyé avec succès !');">
+                    <div class="form-group">
+                        <label for="name">Nom / Prénom</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre Message</label>
+                        <textarea id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script simple pour gestion du menu actif au scroll -->
+    <script>
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll(".nav-links a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").includes(current)) {
+                    a.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
