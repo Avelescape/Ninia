@@ -45,7 +45,7 @@
     .cadre{position:relative;background:#d2c6b5;overflow:hidden;cursor:zoom-in}
     .portrait .cadre{aspect-ratio:3/4}
     .paysage .cadre{aspect-ratio:4/3}
-    .cadre img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
+    .cadre img{display:block;width:100%;height:100%;object-fit:contain;background:#d9d0c2;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
     .cadre::after{content:"Voir l’œuvre  +";position:absolute;right:18px;bottom:18px;padding:10px 13px;background:rgba(17,16,14,.82);color:var(--creme);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.35s}
     .cadre:hover img{transform:scale(1.025);filter:brightness(.93)}
     .cadre:hover::after{opacity:1;transform:none}
