@@ -1,1 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Galerie Ninia</title>
+  <style>
+    :root {
+      --noir: #11100e;
+      --creme: #eee6d8;
+      --beige-clair: #e7dece;
+      --or: #c99749;
+      --taupe: #aaa094;
+      --noir-foncé: #181612;
+      --lien: #7a6c60;
+      --lien-hover: #9e7332;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--noir);
+      color: var(--creme);
+      font-family: Arial, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .gallery-page {
+      background: var(--noir);
+      padding: 80px 4vw 100px;
+    }
+
+    .gallery-header {
+      max-width: 1200px;
+      margin: 0 auto 42px;
+    }
+
+    .surtitre {
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      color: var(--or);
+      letter-spacing: .24em;
+      font-size: .65rem;
+    }
+
+    .gallery-title {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      line-height: 1.02;
+      color: var(--creme);
+    }
+
+    .collections {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2.2rem 2vw;
+      background: var(--beige-clair);
+      color: #1b1712;
+      padding: 30px 2vw 60px;
+    }
+
+    .collection {
+      background: transparent;
+    }
+
+    .image-collection {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #40352b;
+    }
+
+    .image-collection img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .collection:hover .image-collection img {
+      transform: scale(1.03);
+    }
+
+    .image-collection span {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: rgba(20,16,12,.70);
+      color: #dcb068;
+      font-size: .66rem;
+    }
+
+    .infos {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 22px 4px 0;
+      gap: 1rem;
+    }
+
+    .infos p {
+      margin: 0;
+      color: #776d60;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: .6rem;
+    }
+
+    .infos h2 {
+      margin: 8px 0 0;
+      font: 400 1.8rem Georgia, serif;
+      line-height: 1.1;
+    }
+
+    .infos > a {
+      font: 600 .6rem -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--lien);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: .3s ease;
+      opacity: .85;
+      white-space: nowrap;
+    }
+
+    .infos > a::after {
+      content: " →";
+      font-size: .95em;
+      transition: transform .3s ease;
+      color: #8d7d6f;
+    }
+
+    .infos > a:hover {
+      opacity: 1;
+      color: var(--lien-hover);
+    }
+
+    .infos > a:hover::after {
+      transform: translateX(3px);
+    }
+
+    .btn-retour {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0;
+      padding: 14px 22px;
+      background: #72c8ff;
+      color: #06263d;
+      border: 2px solid #1e9fe8;
+      border-radius: 12px;
+      font: 700 .75rem -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      box-shadow: 0 8px 22px rgba(114,200,255,.45);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn-retour:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(114,200,255,.7);
+    }
+
+    @media (max-width: 860px) {
+      .collections {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .gallery-page {
+        padding-left: 7vw;
+        padding-right: 7vw;
+      }
+
+      .collections {
+        grid-template-columns: 1fr;
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
+      .infos {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .infos > a {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="gallery-page">
+    <header class="gallery-header">
+      <p class="surtitre">Œuvres & collections</p>
+      <h1 class="gallery-title">La matière comme paysage</h1>
+    </header>
+
+    <section class="collections" aria-label="Galerie d'œuvres de Ninia">
+      <article class="collection">
+        <div class="image-collection">
+          <img src="images/oeuvre2.jpg" alt="Entre deux mondes">
+        </div>
+        <div class="infos">
+          <div>
+            <p>Série</p>
+            <h2>Entre deux mondes</h2>
+          </div>
+          <a href="#">Entrez dans la galerie</a>
+        </div>
+      </article>
+
+      <article class="collection">
+        <div class="image-collection">
+          <img src="images/oeuvre9.png" alt="Pièces sculpturales">
+        </div>
+        <div class="infos">
+          <div>
+            <p>Uniques</p>
+            <h2>Pièces sculpturales</h2>
+          </div>
+          <a href="#">Entrez dans la galerie</a>
+        </div>
+      </article>
+
+      <article class="collection">
+        <div class="image-collection">
+          <img src="images/oeuvre7.jpg" alt="Lumières enfouies">
+        </div>
+        <div class="infos">
+          <div>
+            <p>Tableaux</p>
+            <h2>Lumières enfouies</h2>
+          </div>
+          <a href="#">Entrez dans la galerie</a>
+        </div>
+      </article>
+
+      <article class="collection">
+        <div class="image-collection">
+          <img src="images/WEBPchevalet1.webp" alt="Atelier de Ninia">
+        </div>
+        <div class="infos">
+          <div>
+            <p>Studio</p>
+            <h2>Atelier intime</h2>
+          </div>
+          <a href="#">Entrez dans la galerie</a>
+        </div>
+      </article>
+
+      <article class="collection">
+        <div class="image-collection">
+          <img src="images/WEBPNinia.webp" alt="Portrait de Ninia">
+        </div>
+        <div class="infos">
+          <div>
+            <p>Portrait</p>
+            <h2>Le geste créateur</h2>
+          </div>
+          <a href="#">Entrez dans la galerie</a>
+        </div>
+      </article>
+    </section>
+
+    <div style="display:flex; justify-content:center;">
+      <a href="../index.html" class="btn-retour">Retour aux maquettes</a>
+    </div>
+  </main>
+</body>
+</html>
 
