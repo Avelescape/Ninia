@@ -10,6 +10,10 @@
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--noir);color:var(--creme);font-family:Arial,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit}
     .hero{position:relative;width:100%;aspect-ratio:941/1672;overflow:hidden;background:#24170d}
     .hero-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+    .identite-hero{position:absolute;z-index:5;top:6.5%;left:7%;width:52%;text-align:center;color:#f5f1e8;text-shadow:0 2px 14px rgba(20,12,7,.28)}
+    .identite-hero h1{margin:0;font:400 clamp(2.35rem,10vw,4.2rem)/.95 Georgia,serif;letter-spacing:.22em;text-indent:.22em}
+    .identite-hero .metier{margin:.75rem 0 0;font:300 clamp(.72rem,2.8vw,1rem)/1.2 Arial,sans-serif;letter-spacing:.36em;text-indent:.36em;text-transform:uppercase;color:#d6b173}
+    .identite-hero .signature{margin:2.2rem auto 0;max-width:19rem;font:300 clamp(1.05rem,4.4vw,1.65rem)/1.35 Georgia,serif;letter-spacing:.025em;color:#f5f1e8}
     header{position:absolute;z-index:20;inset:0 0 auto;display:flex;justify-content:flex-end;padding:4% 5%}
     .menu-bouton{width:48px;height:48px;border:0;background:transparent;padding:8px;cursor:pointer}
     .menu-bouton span{display:block;height:2px;background:var(--or);margin:7px 0}
@@ -25,7 +29,7 @@
     .piece{background:#c2aa88;color:#251d16}.visuel-piece{height:68vh;min-height:500px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#7b5c42,#29231e 62%,#181614);overflow:hidden}.visuel-piece img{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain;display:block;filter:saturate(.8) contrast(1.06);background:#201914}.vase{display:none}.texte-piece{padding:65px 8vw 85px}.texte-piece h2{font-size:3.7rem;line-height:1.04;margin:20px 0}.texte-piece>p:last-child{line-height:1.7}
     .contact{padding:110px 8vw 40px;min-height:720px;display:flex;flex-direction:column;background:#0f0e0c}.contact h2{font-size:clamp(3.7rem,14vw,6rem);line-height:1.02;margin:26px 0 55px}.email{font:1.25rem Georgia,serif;border-bottom:1px solid #5f5140;padding-bottom:15px}.liens{display:flex;flex-direction:column;gap:20px;margin-top:55px;text-transform:uppercase;letter-spacing:.14em;font-size:.67rem}.liens a{padding-bottom:12px;border-bottom:1px solid #312c25}.contact small{margin-top:auto;color:#6f685f;font-size:.6rem}
     .btn-retour{display:inline-flex;align-items:center;justify-content:center;margin-top:28px;padding:14px 22px;background:#72c8ff;border:2px solid #1e9fe8;color:#06263d;border-radius:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;box-shadow:0 8px 22px rgba(114,200,255,.45);transition:transform .2s ease,box-shadow .2s ease}.btn-retour:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(114,200,255,.7)}
-    @media (max-width:699px){body{overflow-x:hidden}.hero{height:auto;aspect-ratio:941/1672}.hero-scene{object-fit:contain;object-position:center top}.oeuvre-chevalet{left:50%;top:41%;transform:translateX(-50%);width:42%;height:30%}.menu-bouton{width:42px;height:42px}.nav,nav{padding:14vw 8vw}.nav a,nav a{font-size:2rem}.intro,.demarche,.contact{padding-left:7vw;padding-right:7vw}.intro h1{font-size:clamp(2.4rem,14vw,4rem)}.demarche blockquote{font-size:clamp(2.2rem,11vw,3.2rem)}.piece{display:block}.visuel-piece{height:52vh;min-height:340px}.visuel-piece img{width:100%;height:auto;max-height:100%}.texte-piece{padding:40px 7vw 60px}.texte-piece h2{font-size:clamp(2.3rem,9vw,3rem)}.contact h2{font-size:clamp(2.5rem,12vw,4rem)}.infos{flex-direction:column;align-items:flex-start;gap:10px}.infos .galerie-lien{font-size:.72rem}}
+    @media (max-width:699px){body{overflow-x:hidden}.hero{height:auto;aspect-ratio:941/1672}.hero-scene{object-fit:contain;object-position:center top}.identite-hero{top:7%;left:5%;width:60%}.identite-hero .signature{margin-top:1.6rem;max-width:15rem}.oeuvre-chevalet{left:50%;top:41%;transform:translateX(-50%);width:42%;height:30%}.menu-bouton{width:42px;height:42px}.nav,nav{padding:14vw 8vw}.nav a,nav a{font-size:2rem}.intro,.demarche,.contact{padding-left:7vw;padding-right:7vw}.intro h1{font-size:clamp(2.4rem,14vw,4rem)}.demarche blockquote{font-size:clamp(2.2rem,11vw,3.2rem)}.piece{display:block}.visuel-piece{height:52vh;min-height:340px}.visuel-piece img{width:100%;height:auto;max-height:100%}.texte-piece{padding:40px 7vw 60px}.texte-piece h2{font-size:clamp(2.3rem,9vw,3rem)}.contact h2{font-size:clamp(2.5rem,12vw,4rem)}.infos{flex-direction:column;align-items:flex-start;gap:10px}.infos .galerie-lien{font-size:.72rem}}
     @media(min-width:700px){.hero{width:min(100%,700px);margin:auto}.intro,.demarche,.contact{padding-left:15vw;padding-right:15vw}.collections{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;padding:80px 6vw}.collection:nth-child(2){margin-top:90px}.piece{display:grid;grid-template-columns:1.2fr 1fr;align-items:center}.texte-piece{padding:8vw}nav{left:auto;width:420px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}nav{transition:none}}
   </style>
@@ -35,6 +39,11 @@
     <section class="hero" id="accueil">
       <!-- Image de fond issue de la maquette -->
       <img class="hero-scene" src="../images/hero-ria.png" alt="Atelier de Ninia avec une toile sur un chevalet">
+      <div class="identite-hero" aria-label="Ninia, artiste — Autour de la matière et de la lumière">
+        <h1>NINIA</h1>
+        <p class="metier">Artiste</p>
+        <p class="signature">Autour de la matière<br>et de la lumière</p>
+      </div>
       <header><button class="menu-bouton" id="menuBouton" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button></header>
       <nav id="menu"><a href="#oeuvres">Œuvres</a><a href="#demarche">Démarche</a><a href="#contact">Contact</a></nav>
     </section>
