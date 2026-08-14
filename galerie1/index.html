@@ -14,6 +14,11 @@
     a{color:inherit;text-decoration:none}
     button{font:inherit}
 
+    .bouton-retour{position:fixed;z-index:40;left:max(18px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid rgba(201,151,73,.65);border-radius:999px;background:rgba(17,16,14,.92);color:var(--creme);box-shadow:0 8px 28px rgba(0,0,0,.22);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);transition:background .25s,border-color .25s,transform .25s}
+    .bouton-retour::before{content:"\2190";color:var(--or);font-size:1.05rem;line-height:1}
+    .bouton-retour:hover{background:var(--brun);border-color:var(--or);transform:translateY(-2px)}
+    .bouton-retour:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+
     .entete{position:relative;min-height:68vh;padding:26px 6vw 80px;display:flex;flex-direction:column;justify-content:space-between;background:var(--noir);color:var(--creme);overflow:hidden}
     .entete::after{content:"";position:absolute;right:-10%;bottom:-38%;width:65vw;height:65vw;border:1px solid rgba(201,151,73,.22);border-radius:50%;box-shadow:0 0 0 5vw rgba(201,151,73,.04),0 0 0 11vw rgba(201,151,73,.025)}
     .barre{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between}
@@ -88,14 +93,16 @@
   </style>
 </head>
 <body>
+  <a class="bouton-retour" href="../index.html" aria-label="Retour à la page précédente">Retour</a>
+
   <header class="entete" id="haut">
     <div class="barre">
       <a class="logo" href="../maquette2/index.html">NINIA<small>Artiste</small></a>
       <button class="menu-bouton" id="menuBouton" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
     <div class="titre">
-      <p class="surtitre">Galerie · Série</p>
-      <h1>L'Entre deux<br>mondes</h1>
+      <p class="surtitre">Galerie · Tableaux</p>
+      <h1>Peintures</h1>
     
     </div>
   </header>
@@ -109,7 +116,7 @@
 
   <main>
     <section class="introduction">
-      <div><p class="surtitre">La collection</p><h2>Des œuvres uniques.</h2></div>
+      <div><p class="surtitre"></p><h2>La collection</h2></div>
       
     </section>
 
@@ -122,7 +129,7 @@
     <section class="galerie" id="galerie">
       <div class="grille">
         <article class="oeuvre portrait">
-          <div class="cadre"><img src="../images/oeuvre2.jpg" alt="L'Entre deux mondes: L'Arbre" loading="lazy"></div>
+          <div class="cadre"><img src="../images/oeuvre2.jpg" alt="toile portrait" loading="lazy"></div>
           <span class="numero">Œuvre 01 · Portrait</span>
           <h2>L'Entre deux mondes: L'Arbre</h2>
           <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Dans cette œuvre, la matière devient un passage. L’arbre, dont l’élan se prolonge vers le ciel, s’est imposé à moi. Puis, au fil de la création, des êtres se sont invités dans la matière — des présences que certains regards sauront peut-être percevoir.  »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
@@ -132,7 +139,7 @@
     
 
         <article class="oeuvre paysage">
-          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: La Terre" loading="lazy"></div>
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="toile paysage" loading="lazy"></div>
           <span class="numero">Œuvre 03 · Paysage</span>
           <h2>L'Entre deux monde: La Terre</h2>
           <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Cet horizon n’appartient à aucun lieu précis. Il est né d’un souvenir, puis le geste et les textures lui ont donné leur propre histoire. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
@@ -140,9 +147,9 @@
         </article>
 
         <article class="oeuvre portrait">
-          <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: Le Ciel" loading="lazy"></div>
+          <div class="cadre"><img src="../images/oeuvre.jpg" alt="toile" loading="lazy"></div>
           <span class="numero">Œuvre 04 · Portrait</span>
-          <h2>L'Entre deux mondes: Le Ciel</h2>
+          <h2>Mer d'Iroise</h2>
           <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Superposer, effacer, recommencer : chaque strate conserve la mémoire de la précédente jusqu’à ce qu’un équilibre inattendu apparaisse. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
           <p class="fiche">Acrylique, sable et feuille métallique · 100 × 70 cm · Pièce unique</p>
         </article>
@@ -150,7 +157,7 @@
         <article class="oeuvre portrait">
           <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: Le Feu" loading="lazy"></div>
           <span class="numero">Œuvre 05 · Portrait</span>
-          <h2>L'Entre deux mondes: Le Feu</h2>
+          <h2>La Sicile</h2>
           <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« Les tons profonds invitent à ralentir. Quelques éclats traversent la surface comme une respiration retenue dans la matière. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
           <p class="fiche">Technique mixte sur toile · 80 × 60 cm · Pièce unique</p>
         </article>
@@ -158,7 +165,7 @@
         <article class="oeuvre paysage">
           <div class="cadre"><img src="../images/oeuvre.jpg" alt="L'Entre deux mondes: L'Eau" loading="lazy"></div>
           <span class="numero">Œuvre 06 · Paysage</span>
-          <h2>L'Entre deux mondes: L'Eau</h2>
+          <h2>L'Océan</h2>
           <div class="details"><div><p class="mot-titre">Le mot de l’artiste</p><p class="mot">« La lumière n’est pas posée sur la toile : elle semble venir de l’intérieur, filtrée par les couches, les creux et les irrégularités. »</p></div><div class="prix"><span>Prix</span><strong>0000 €</strong></div></div>
           <p class="fiche">Acrylique et matières sur toile · 70 × 110 cm · Pièce unique</p>
         </article>
